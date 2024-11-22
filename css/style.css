@@ -209,7 +209,7 @@ img {
     text-align: center;
 }
 
-.grid-nuestros-curso {
+.grid-nuestros-cursos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 45rem;
@@ -237,7 +237,7 @@ img {
 
 
 
-.grid-nuestros-curso .curso img {
+.grid-nuestros-cursos .curso img {
     width: 100%;
     height: 50%;
     object-fit: cover;

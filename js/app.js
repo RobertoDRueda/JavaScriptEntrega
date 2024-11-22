@@ -148,19 +148,23 @@ const cursos = [
 
 const imgCarrito = document.getElementById('img-carrito');
 const carrito = document.getElementById('carrito');
+const contenedorCarrito = document.querySelector('#lista-carrito tbody');
+const listaCursos = document.querySelector('.grid-nuestros-cursos');
+
+let cursosEnElCarrito = [];
 
 
 
 const generarCursos = (cursos) => {
-    const contenedor = document.querySelector(".grid-nuestros-curso");
+    const contenedor = document.querySelector(".grid-nuestros-cursos");
 
     ////////Ejemplo Curso
     // <div class="curso">
     //     <img src="img/cursos/angular.jpg" alt="Angular" loading="lazy">
     //     <div class="texto-curso">
-    //         <h3>Angular</h3>
-    //         <p>Lucas Martínez Gómez</p>
-    //         <p>185 horas</p>
+    //         <h3 class="nombre-curso">Angular</h3>
+    //         <p class="instructor-curso">Lucas Martínez Gómez</p>
+    //         <p class="duracion-curso">185 horas</p>
     //         <p class="precio">$35,000.00</p>
     //         <a class="btn-curso" href="#" data-id="1">Agregar Al Carrito</a>
     //     </div>
@@ -181,16 +185,19 @@ const generarCursos = (cursos) => {
         const textoCurso = document.createElement("div");
         textoCurso.classList.add("texto-curso");
 
-        // <h3>Angular</h3>
+        // <h3 class="nombre-curso">Angular</h3>
         const titulo = document.createElement("h3");
+        titulo.classList.add("nombre-curso");
         titulo.textContent = curso.titulo;
 
-        // <p>Lucas Martínez Gómez</p>
+        // <p class="instructor-curso">Lucas Martínez Gómez</p>
         const instructor = document.createElement("p");
+        instructor.classList.add("instructor-curso");
         instructor.textContent = curso.instructor;
 
-        // <p>185 horas</p>
+        // <p class="duracion-curso">185 horas</p>
         const horas = document.createElement("p");
+        horas.classList.add("duracion-curso");
         horas.textContent = curso.horas;
 
         // <p class="precio">$35,000.00</p>
@@ -211,11 +218,80 @@ const generarCursos = (cursos) => {
         // Agregar imagen y <div class="texto-curso"> a <div class="curso">
         divCurso.append(img, textoCurso);
 
-        // Agregar curso a <div class="grid-nuestros-curso">
+        // Agregar curso a <div class="grid-nuestros-cursos">
         contenedor.appendChild(divCurso);
     });
 };
 
+//Elimina los cursos del tbody
+const LimpiarHTML = () => { 
+    while(contenedorCarrito.firstChild){
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+    }
+};
+
+// Muestra el carrito en el Html
+const mostrarCarritoEnHTML = () => {
+    //Limpiar el HTML
+    LimpiarHTML();
+
+
+    // Recorre el carrito y genera el HTML
+    cursosEnElCarrito.forEach(curso => {
+        const {id, imagen, nombre, profesor, duracion, precio, cantidad} = curso;
+        const row = document.createElement('tr');
+        row.innerHTML = 
+        `
+            <td>
+                <img src = "${imagen}" width = "100">
+            </td>
+            <td>
+                ${nombre}  
+            </td>
+            <td>
+                ${precio}  
+            </td>
+            <td>
+                ${profesor}  
+            </td>
+            <td>
+                ${duracion}  
+            </td>
+            <td>
+                ${cantidad}  
+            </td>
+        `;
+
+        //Agrega el HTML del carrito en el tbody
+        contenedorCarrito.appendChild(row);
+    })
+};
+
+//Leer Datos curso
+const leerDatosCruso = (curso) =>{
+    // Crear un objeto con el contenido del curso actual
+    const infoCurso = {
+        id: curso.querySelector('a').getAttribute('data-id'),
+        imagen: curso.querySelector('img').src,
+        nombre: curso.querySelector('.nombre-curso').textContent,
+        profesor: curso.querySelector('.instructor-curso').textContent,
+        duracion: curso.querySelector('.duracion-curso').textContent,
+        precio: curso.querySelector('.precio').textContent,
+        cantidad: 1
+    }
+    
+    cursosEnElCarrito = [ ...cursosEnElCarrito, infoCurso];
+    mostrarCarritoEnHTML();
+}
+
+const agregarCursoAlCarrito = (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains('btn-curso')){
+        const cursoSelectionado = e.target.parentElement.parentElement;
+        leerDatosCruso(cursoSelectionado);
+    }
+    
+}
 
 const cargarEventListeners = () => {
 
@@ -225,6 +301,12 @@ const cargarEventListeners = () => {
     });
 
     generarCursos(cursos);
+
+    //Agregar Cursos al carrito
+    listaCursos.addEventListener('click', (e) => {
+        //Agregar curso al carrito
+        agregarCursoAlCarrito(e);
+    });
 };
 
 cargarEventListeners();
