@@ -150,7 +150,10 @@ const imgCarrito = document.getElementById('img-carrito');
 const carrito = document.getElementById('carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaCursos = document.querySelector('.grid-nuestros-cursos');
-const vaciarCarritoBtn = document.querySelector('#vaciar-carrito')
+const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
+
+const formulario = document.querySelector("#busqueda");
+const textoBuscado = document.querySelector("#buscador");
 
 let cursosEnElCarrito = [];
 
@@ -225,8 +228,8 @@ const generarCursos = (cursos) => {
 };
 
 //Elimina los cursos del tbody
-const LimpiarHTML = () => { 
-    while(contenedorCarrito.firstChild){
+const LimpiarHTML = () => {
+    while (contenedorCarrito.firstChild) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
 };
@@ -239,10 +242,10 @@ const mostrarCarritoEnHTML = () => {
 
     // Recorre el carrito y genera el HTML
     cursosEnElCarrito.forEach(curso => {
-        const {id, imagen, nombre, profesor, duracion, precio, cantidad} = curso;
+        const { id, imagen, nombre, profesor, duracion, precio, cantidad } = curso;
         const row = document.createElement('tr');
-        row.innerHTML = 
-        `
+        row.innerHTML =
+            `
             <td>
                 <img src = "${imagen}" width = "100">
             </td>
@@ -272,7 +275,7 @@ const mostrarCarritoEnHTML = () => {
 };
 
 //Leer Datos curso
-const leerDatosCruso = (curso) =>{
+const leerDatosCruso = (curso) => {
     // Crear un objeto con el contenido del curso actual
     const infoCurso = {
         id: curso.querySelector('a').getAttribute('data-id'),
@@ -286,40 +289,40 @@ const leerDatosCruso = (curso) =>{
 
     // Incrementar la cantidad de cursos
     const existeCursoEnCarrito = cursosEnElCarrito.some(curso => curso.id === infoCurso.id);
-    if (existeCursoEnCarrito){
-        const cursos = cursosEnElCarrito.map( curso => {
-            if(curso.id === infoCurso.id){
+    if (existeCursoEnCarrito) {
+        const cursos = cursosEnElCarrito.map(curso => {
+            if (curso.id === infoCurso.id) {
                 curso.cantidad++;
                 return curso;
             }
-            else{
+            else {
                 return curso;
             }
         });
-        cursosEnElCarrito = [ ...cursos];
+        cursosEnElCarrito = [...cursos];
     }
-    else{
-        cursosEnElCarrito = [ ...cursosEnElCarrito, infoCurso];
+    else {
+        cursosEnElCarrito = [...cursosEnElCarrito, infoCurso];
     }
-    
+
     mostrarCarritoEnHTML();
 }
 
 const agregarCursoAlCarrito = (e) => {
     e.preventDefault();
-    if (e.target.classList.contains('btn-curso')){
+    if (e.target.classList.contains('btn-curso')) {
         const cursoSelectionado = e.target.parentElement.parentElement;
         leerDatosCruso(cursoSelectionado);
     }
-    
+
 }
 
 const eliminarCursoEnElCarrito = (e) => {
-    if(e.target.classList.contains('borrar-curso')){
+    if (e.target.classList.contains('borrar-curso')) {
         const cursoId = e.target.getAttribute('data-id');
 
         //Elimina del arreglo cursosEnElCarrito el curso por data-id
-        cursosEnElCarrito = cursosEnElCarrito.filter( curso => curso.id !== cursoId);
+        cursosEnElCarrito = cursosEnElCarrito.filter(curso => curso.id !== cursoId);
         mostrarCarritoEnHTML();
     }
 };
@@ -340,7 +343,7 @@ const cargarEventListeners = () => {
     });
 
     //Eliminar Cursos en el Carrito
-    carrito.addEventListener('click',(e) => {
+    carrito.addEventListener('click', (e) => {
         eliminarCursoEnElCarrito(e);
     });
 
@@ -348,6 +351,38 @@ const cargarEventListeners = () => {
     vaciarCarritoBtn.addEventListener('click', () => {
         cursosEnElCarrito = [];
         LimpiarHTML();
+    });
+
+    //Buscar Curso
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const cursoBuscado = textoBuscado.value.toLowerCase().trim();
+        if (!cursoBuscado) {
+            listaCursos.innerHTML = "";
+            generarCursos(cursos);
+            return;
+        }
+
+        // Filtrar los cursos que contienen el texto buscado en el título
+        const cursosFiltrados = cursos.filter(curso => curso.titulo.toLowerCase().includes(cursoBuscado));
+
+        if (cursosFiltrados.length > 0) {
+            // Generar solo los cursos que coinciden con la búsqueda
+            listaCursos.innerHTML = "";
+            generarCursos(cursosFiltrados);
+            return;
+        }
+    });
+
+    // Generar cursos por defecto si no hay cursos a buscar
+    textoBuscado.addEventListener("input", () => {
+        const texto = textoBuscado.value.trim(); 
+
+        if (texto === "") {
+            const contenedor = document.querySelector(".grid-nuestros-cursos");
+            contenedor.innerHTML = ""; 
+            generarCursos(cursos); 
+        }
     });
 };
 
