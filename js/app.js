@@ -150,6 +150,7 @@ const imgCarrito = document.getElementById('img-carrito');
 const carrito = document.getElementById('carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaCursos = document.querySelector('.grid-nuestros-cursos');
+const vaciarCarritoBtn = document.querySelector('#vaciar-carrito')
 
 let cursosEnElCarrito = [];
 
@@ -341,6 +342,12 @@ const cargarEventListeners = () => {
     //Eliminar Cursos en el Carrito
     carrito.addEventListener('click',(e) => {
         eliminarCursoEnElCarrito(e);
+    });
+
+    //Vaciar el carrito
+    vaciarCarritoBtn.addEventListener('click', () => {
+        cursosEnElCarrito = [];
+        LimpiarHTML();
     });
 };
 
