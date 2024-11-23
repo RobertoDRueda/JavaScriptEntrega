@@ -260,6 +260,9 @@ const mostrarCarritoEnHTML = () => {
             <td>
                 ${cantidad}  
             </td>
+            <td>
+                <a href="#" class="borrar-curso" data-id="${id}">X</a>
+            </td>
         `;
 
         //Agrega el HTML del carrito en el tbody
@@ -310,6 +313,16 @@ const agregarCursoAlCarrito = (e) => {
     
 }
 
+const eliminarCursoEnElCarrito = (e) => {
+    if(e.target.classList.contains('borrar-curso')){
+        const cursoId = e.target.getAttribute('data-id');
+
+        //Elimina del arreglo cursosEnElCarrito el curso por data-id
+        cursosEnElCarrito = cursosEnElCarrito.filter( curso => curso.id !== cursoId);
+        mostrarCarritoEnHTML();
+    }
+};
+
 const cargarEventListeners = () => {
 
     // Mostrar Carrito
@@ -323,6 +336,11 @@ const cargarEventListeners = () => {
     listaCursos.addEventListener('click', (e) => {
         //Agregar curso al carrito
         agregarCursoAlCarrito(e);
+    });
+
+    //Eliminar Cursos en el Carrito
+    carrito.addEventListener('click',(e) => {
+        eliminarCursoEnElCarrito(e);
     });
 };
 
