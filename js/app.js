@@ -279,8 +279,25 @@ const leerDatosCruso = (curso) =>{
         precio: curso.querySelector('.precio').textContent,
         cantidad: 1
     }
+
+    // Incrementar la cantidad de cursos
+    const existeCursoEnCarrito = cursosEnElCarrito.some(curso => curso.id === infoCurso.id);
+    if (existeCursoEnCarrito){
+        const cursos = cursosEnElCarrito.map( curso => {
+            if(curso.id === infoCurso.id){
+                curso.cantidad++;
+                return curso;
+            }
+            else{
+                return curso;
+            }
+        });
+        cursosEnElCarrito = [ ...cursos];
+    }
+    else{
+        cursosEnElCarrito = [ ...cursosEnElCarrito, infoCurso];
+    }
     
-    cursosEnElCarrito = [ ...cursosEnElCarrito, infoCurso];
     mostrarCarritoEnHTML();
 }
 
