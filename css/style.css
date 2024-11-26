@@ -50,7 +50,7 @@ p {
 
 .full-width {
     width: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .nombre-sitio {
@@ -76,7 +76,8 @@ p {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 20px;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+}
 
 #carrito {
     display: none;
@@ -110,7 +111,52 @@ p {
 .submenu {
     position: relative;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
+}
+
+.flex {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-blue {
+    background-color: #037bc0;
+}
+
+.text-white {
+    color: white;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.p-2 {
+    padding: 2rem;
+}
+
+.text-sm {
+    font-size: 1.875rem;
+    line-height: 1.25rem;
 }
 
 ul {
@@ -136,7 +182,8 @@ img {
     border-bottom: 1px solid #ddd;
 }
 
-#vaciar-carrito {
+#vaciar-carrito,
+#comprar-carrito {
     display: inline-block;
     padding: 5px 10px;
     background: #d9534f;
@@ -146,7 +193,12 @@ img {
     text-align: center;
 }
 
-#vaciar-carrito:hover {
+#comprar-carrito {
+    display: none;
+}
+
+#vaciar-carrito:hover,
+#comprar-carrito:hover {
     background: #c9302c;
 }
 
@@ -160,8 +212,8 @@ img {
 }
 
 #hero {
-    
-    background-image:url(../img/hero.jpg);
+
+    background-image: url(../img/hero.jpg);
     background-position: center;
     height: 400px;
     background-size: cover;
@@ -174,18 +226,21 @@ img {
     margin-top: 8rem;
     color: white;
 }
+
 .contenido-hero form {
     position: relative;
     margin-bottom: 0;
 }
+
 .contenido-hero form #buscador {
     height: 50px;
     margin-bottom: 0;
 }
+
 .contenido-hero form .submit-buscador {
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
     height: 100%;
     padding: 0;
     display: block;
@@ -194,7 +249,7 @@ img {
     background-image: url(../img/lupa.png);
     background-position: center;
     background-repeat: no-repeat;
-    border:none;
+    border: none;
 }
 
 
@@ -216,7 +271,7 @@ img {
     gap: 1.5rem;
     width: 80%;
     margin: 0 auto;
-    justify-items: center; 
+    justify-items: center;
 }
 
 .curso {
@@ -224,14 +279,14 @@ img {
     max-height: 40rem;
     margin: 2rem;
     background-color: #037bc0;
-    transition: 1s; 
+    transition: 1s;
 }
 
 .curso:hover {
-      transform: scale(1.05);
-      -webkit-box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75);
-      box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75); 
+    transform: scale(1.05);
+    -webkit-box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75);
+    box-shadow: 22px 22px 39px -14px rgba(0, 0, 0, 0.75);
 }
 
 
@@ -252,27 +307,36 @@ img {
     color: #fff;
     padding: 2rem;
     width: 100%;
-    height: 50%; }
-    .texto-curso h3 {
-      margin: 0; }
-    .texto-curso p {
-      margin: 0 0 .5rem 0; }
-  
-  .texto-curso .precio {
-    font-size: 2.8rem;
-    font-weight: 900; }
+    height: 50%;
+}
 
-    .btn-curso {
-        background-color: #8cbc00;
-        display: block;
-        color: #fff;
-        padding: 1rem;
-        border: none;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: 1000;
-        font-size: medium;
-        text-align: center; }
-        .btn-curso:hover {
-          background-color: #769c02;
-          cursor: pointer; }
+.texto-curso h3 {
+    margin: 0;
+}
+
+.texto-curso p {
+    margin: 0 0 .5rem 0;
+}
+
+.texto-curso .precio {
+    font-size: 2.8rem;
+    font-weight: 900;
+}
+
+.btn-curso {
+    background-color: #8cbc00;
+    display: block;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 1000;
+    font-size: medium;
+    text-align: center;
+}
+
+.btn-curso:hover {
+    background-color: #769c02;
+    cursor: pointer;
+}

@@ -148,6 +148,7 @@ const cursos = [
 
 const imgCarrito = document.getElementById('img-carrito');
 const carrito = document.getElementById('carrito');
+const comprar = document.getElementById('comprar-carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaCursos = document.querySelector('.grid-nuestros-cursos');
 const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
@@ -234,11 +235,46 @@ const LimpiarHTML = () => {
     }
 };
 
+const OcultarBtnComprarCursos = () => {
+    if (cursosEnElCarrito.length > 0){
+        comprar.style.display = 'inline-block';
+    }
+    else{
+        comprar.style.display = 'none';
+    }
+};
+
+const comprarCarrito = () => {
+    spinner.classList.add('flex');
+    spinner.classList.remove('hidden');
+    
+    vaciarCarritoBtn.style.pointerEvents = 'none';
+    comprar.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+        spinner.classList.add('hidden');
+        spinner.classList.remove('flex');
+        const mensajeExito = document.createElement('p');
+        mensajeExito.classList.add('mt-10', 'text-center', 'bg-blue', 'font-bold', 'uppercase', 'text-white', 'p-2', 'text-sm')
+        mensajeExito.textContent = '¡Tu compra se completó con éxito!';
+        carrito.appendChild(mensajeExito);
+        setTimeout(() => {             
+            mensajeExito.remove();
+            cursosEnElCarrito = [];
+            vaciarCarritoBtn.style.pointerEvents = '';
+            comprar.style.pointerEvents = '';
+            LimpiarHTML();
+            OcultarBtnComprarCursos();
+        },3000);
+    }, 3000);
+}
+
 // Muestra el carrito en el Html
 const mostrarCarritoEnHTML = () => {
     //Limpiar el HTML
     LimpiarHTML();
 
+    OcultarBtnComprarCursos();
 
     // Recorre el carrito y genera el HTML
     cursosEnElCarrito.forEach(curso => {
@@ -350,6 +386,7 @@ const cargarEventListeners = () => {
     //Vaciar el carrito
     vaciarCarritoBtn.addEventListener('click', () => {
         cursosEnElCarrito = [];
+        OcultarBtnComprarCursos();
         LimpiarHTML();
     });
 
@@ -384,6 +421,10 @@ const cargarEventListeners = () => {
             generarCursos(cursos); 
         }
     });
+
+    comprar.addEventListener('click', (e) => {
+        comprarCarrito();
+    })
 };
 
 cargarEventListeners();
