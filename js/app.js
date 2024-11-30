@@ -261,12 +261,13 @@ const comprarCarrito = () => {
         setTimeout(() => {             
             mensajeExito.remove();
             cursosEnElCarrito = [];
+            sincronizarLocalStorage();
             vaciarCarritoBtn.style.pointerEvents = '';
             comprar.style.pointerEvents = '';
             LimpiarHTML();
             OcultarBtnComprarCursos();
-        },3000);
-    }, 3000);
+        },2000);
+    }, 2000);
 }
 
 // Muestra el carrito en el Html
@@ -307,7 +308,10 @@ const mostrarCarritoEnHTML = () => {
 
         //Agrega el HTML del carrito en el tbody
         contenedorCarrito.appendChild(row);
-    })
+    });
+
+    // Agregar el carrito de compras al Local Storage
+    sincronizarLocalStorage();
 };
 
 //Leer Datos curso
@@ -363,6 +367,10 @@ const eliminarCursoEnElCarrito = (e) => {
     }
 };
 
+const sincronizarLocalStorage = () => {
+    localStorage.setItem('carrito', JSON.stringify(cursosEnElCarrito));
+}
+
 const cargarEventListeners = () => {
 
     // Mostrar Carrito
@@ -383,9 +391,16 @@ const cargarEventListeners = () => {
         eliminarCursoEnElCarrito(e);
     });
 
+    // Carga en el carrito los cursos del Local Storage
+    document.addEventListener('DOMContentLoaded', () => {
+        cursosEnElCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        mostrarCarritoEnHTML();
+    });
+
     //Vaciar el carrito
     vaciarCarritoBtn.addEventListener('click', () => {
         cursosEnElCarrito = [];
+        sincronizarLocalStorage();
         OcultarBtnComprarCursos();
         LimpiarHTML();
     });
