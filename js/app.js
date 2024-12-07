@@ -236,10 +236,10 @@ const LimpiarHTML = () => {
 };
 
 const OcultarBtnComprarCursos = () => {
-    if (cursosEnElCarrito.length > 0){
+    if (cursosEnElCarrito.length > 0) {
         comprar.style.display = 'inline-block';
     }
-    else{
+    else {
         comprar.style.display = 'none';
     }
 };
@@ -247,7 +247,7 @@ const OcultarBtnComprarCursos = () => {
 const comprarCarrito = () => {
     spinner.classList.add('flex');
     spinner.classList.remove('hidden');
-    
+
     vaciarCarritoBtn.style.pointerEvents = 'none';
     comprar.style.pointerEvents = 'none';
 
@@ -258,7 +258,7 @@ const comprarCarrito = () => {
         mensajeExito.classList.add('mt-10', 'text-center', 'bg-blue', 'font-bold', 'uppercase', 'text-white', 'p-2', 'text-sm')
         mensajeExito.textContent = '¡Tu compra se completó con éxito!';
         carrito.appendChild(mensajeExito);
-        setTimeout(() => {             
+        setTimeout(() => {
             mensajeExito.remove();
             cursosEnElCarrito = [];
             sincronizarLocalStorage();
@@ -266,7 +266,7 @@ const comprarCarrito = () => {
             comprar.style.pointerEvents = '';
             LimpiarHTML();
             OcultarBtnComprarCursos();
-        },2000);
+        }, 2000);
     }, 2000);
 }
 
@@ -353,9 +353,24 @@ const agregarCursoAlCarrito = (e) => {
     if (e.target.classList.contains('btn-curso')) {
         const cursoSelectionado = e.target.parentElement.parentElement;
         leerDatosCruso(cursoSelectionado);
+        MostrarToastify(`El curso: ${cursoSelectionado.querySelector('.nombre-curso').textContent} se ha agregado a tu carrito con éxito.`);
     }
-
 }
+
+const MostrarToastify = (msg) => {
+    Toastify({
+        text: msg,
+        duration: 2000,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: false, // Prevents dismissing of toast on hover #00b09b, #96c93d
+        style: {
+            background: "linear-gradient(to right, #037bc0)",
+        }
+    }).showToast();
+};
+
 
 const eliminarCursoEnElCarrito = (e) => {
     if (e.target.classList.contains('borrar-curso')) {
@@ -399,10 +414,25 @@ const cargarEventListeners = () => {
 
     //Vaciar el carrito
     vaciarCarritoBtn.addEventListener('click', () => {
-        cursosEnElCarrito = [];
-        sincronizarLocalStorage();
-        OcultarBtnComprarCursos();
-        LimpiarHTML();
+        if (cursosEnElCarrito.length > 0) {
+            Swal.fire({
+                title: "¿Seguro que quieres vaciar el carrito?",
+                text: "Los cursos que seleccionaste están a un paso de ayudarte a mejorar tus habilidades. ¿Aún deseas eliminar todo del carrito?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, vaciar carrito",
+                cancelButtonText: "No, continuar comprando"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    cursosEnElCarrito = [];
+                    sincronizarLocalStorage();
+                    OcultarBtnComprarCursos();
+                    LimpiarHTML();
+                }
+            });
+        }
     });
 
     //Buscar Curso
@@ -428,17 +458,30 @@ const cargarEventListeners = () => {
 
     // Generar cursos por defecto si no hay cursos a buscar
     textoBuscado.addEventListener("input", () => {
-        const texto = textoBuscado.value.trim(); 
+        const texto = textoBuscado.value.trim();
 
         if (texto === "") {
             const contenedor = document.querySelector(".grid-nuestros-cursos");
-            contenedor.innerHTML = ""; 
-            generarCursos(cursos); 
+            contenedor.innerHTML = "";
+            generarCursos(cursos);
         }
     });
 
     comprar.addEventListener('click', (e) => {
-        comprarCarrito();
+        Swal.fire({
+            title: "Confirmación de Compra",
+            text: "¿Estás listo para disfrutar de tu nueva adquisición, y comenzar a aprender hoy mismo?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, comprar",
+            cancelButtonText: "No, cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                comprarCarrito();
+            }
+        });
     })
 };
 
