@@ -1,0 +1,146 @@
+[
+    {
+        "id": 1,
+        "titulo": "Angular",
+        "instructor": "Lucas Martínez Gómez",
+        "horas": "185 horas",
+        "precio": "$35,000.00",
+        "imagen": "img/cursos/angular.jpg",
+        "alt": "Angular"
+    },
+    {
+        "id": 2,
+        "titulo": "Android",
+        "instructor": "Sofía Hernández Ruiz",
+        "horas": "85 horas",
+        "precio": "$29,000.00",
+        "imagen": "img/cursos/android.jpg",
+        "alt": "Android"
+    },
+    {
+        "id": 3,
+        "titulo": "C#",
+        "instructor": "Mateo García López",
+        "horas": "285 horas",
+        "precio": "$35,000.00",
+        "imagen": "img/cursos/csharp.jpg",
+        "alt": "C#"
+    },
+    {
+        "id": 4,
+        "titulo": "C++",
+        "instructor": "Valentina Rodríguez Pérez",
+        "horas": "85 horas",
+        "precio": "$10,000.00",
+        "imagen": "img/cursos/c++.jpg",
+        "alt": "C++"
+    },
+    {
+        "id": 5,
+        "titulo": "DevOps",
+        "instructor": "Diego Fernández Torres",
+        "horas": "85 horas",
+        "precio": "$15,000.00",
+        "imagen": "img/cursos/devops.jpg",
+        "alt": "DevOps"
+    },
+    {
+        "id": 6,
+        "titulo": "Full-Stack",
+        "instructor": "Isabella Sánchez Castro",
+        "horas": "285 horas",
+        "precio": "$35,000.00",
+        "imagen": "img/cursos/full-stack.jpg",
+        "alt": "Full-Stack"
+    },
+    {
+        "id": 7,
+        "titulo": "Git",
+        "instructor": "Emilio Vargas Morales",
+        "horas": "12 horas",
+        "precio": "$5,000.00",
+        "imagen": "img/cursos/git.jpg",
+        "alt": "Git"
+    },
+    {
+        "id": 8,
+        "titulo": "HTML",
+        "instructor": "Camila Jiménez Ortiz",
+        "horas": "12 horas",
+        "precio": "$7,000.00",
+        "imagen": "img/cursos/html.jpg",
+        "alt": "HTML"
+    },
+    {
+        "id": 9,
+        "titulo": "Jenkins",
+        "instructor": "Javier Morales Romero",
+        "horas": "14 horas",
+        "precio": "$9,000.00",
+        "imagen": "img/cursos/jenkins.jpg",
+        "alt": "Jenkins"
+    },
+    {
+        "id": 10,
+        "titulo": "JSON",
+        "instructor": "Mariana Pérez Navarro",
+        "horas": "8 horas",
+        "precio": "$9,000.00",
+        "imagen": "img/cursos/json.jpg",
+        "alt": "JSON"
+    },
+    {
+        "id": 11,
+        "titulo": "Nginx",
+        "instructor": "Daniel Castillo Delgado",
+        "horas": "8 horas",
+        "precio": "$9,000.00",
+        "imagen": "img/cursos/nginx.jpg",
+        "alt": "Nginx"
+    },
+    {
+        "id": 12,
+        "titulo": "Node Js",
+        "instructor": "Gabriela Ramos Soto",
+        "horas": "68 horas",
+        "precio": "$39,000.00",
+        "imagen": "img/cursos/node-js.jpg",
+        "alt": "Node Js"
+    },
+    {
+        "id": 13,
+        "titulo": "PHP",
+        "instructor": "Antonio Torres Vargas",
+        "horas": "48 horas",
+        "precio": "$29,000.00",
+        "imagen": "img/cursos/php.jpg",
+        "alt": "PHP"
+    },
+    {
+        "id": 14,
+        "titulo": "Python",
+        "instructor": "Florencia Ríos Pacheco",
+        "horas": "58 horas",
+        "precio": "$32,000.00",
+        "imagen": "img/cursos/python.jpg",
+        "alt": "Python"
+    },
+    {
+        "id": 15,
+        "titulo": "React Js",
+        "instructor": "Sebastián Aguilar Méndez",
+        "horas": "58 horas",
+        "precio": "$35,000.00",
+        "imagen": "img/cursos/react-js.jpg",
+        "alt": "React Js"
+    },
+    {
+        "id": 16,
+        "titulo": "Vue Js",
+        "instructor": "Natalia Delgado Cruz",
+        "horas": "58 horas",
+        "precio": "$33,000.00",
+        "imagen": "img/cursos/vue-js.jpg",
+        "alt": "Vue Js"
+    }
+]
